@@ -71,7 +71,7 @@ InlineKeyboardButton("𝗖𝗖 𝗕𝗢𝗧", url=f"https://t.me/Lord_Vasudev_Kr
     reply_markup = InlineKeyboardMarkup(buttons)
     
     await msg.reply_photo(
-        photo="https://telegra.ph/file/faa1f3ad7116e33d9f402.jpg",
+        photo="https://files.catbox.moe/k1474w.jpg",
         caption=start_txt,
         reply_markup=reply_markup
     )
