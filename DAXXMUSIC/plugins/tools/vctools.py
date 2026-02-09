@@ -15,14 +15,14 @@ from pyrogram import filters
 from DAXXMUSIC.core.call import DAXX
 from pyrogram.types import VideoChatEnded, Message
 from pytgcalls import PyTgCalls
-from pytgcalls.types import AudioPiped, AudioVideoPiped
+from pytgcalls.types import MediaStream, AudioQuality
 from pytgcalls.exceptions import NoActiveGroupCall
 
 @app.on_message(filters.command(["vcinfo"], ["/", "!"]))
 async def strcall(client, message):
     assistant = await group_assistant(DAXX, message.chat.id)
     try:
-        await assistant.join_group_call(message.chat.id, AudioPiped("./DAXXMUSIC/assets/call.mp3"))
+        await assistant.join_group_call(message.chat.id, MediaStream("./DAXXMUSIC/assets/call.mp3", audio_parameters=AudioQuality.HIGH, video_flags=MediaStream.Flags.IGNORE))
         text = "- Beloveds in the call 🫶 :\n\n"
         participants = await assistant.get_participants(message.chat.id)
         k = 0
