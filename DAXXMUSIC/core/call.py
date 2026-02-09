@@ -7,9 +7,7 @@ from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
 from pytgcalls import PyTgCalls
 from pytgcalls.exceptions import (
-    AlreadyJoinedError,
     NoActiveGroupCall,
-    TelegramServerError,
 )
 from pytgcalls.types import Update
 from pytgcalls.types import AudioPiped, AudioVideoPiped
@@ -313,9 +311,7 @@ class Call(PyTgCalls):
             )
         except NoActiveGroupCall:
             raise AssistantErr(_["call_8"])
-        except AlreadyJoinedError:
-            raise AssistantErr(_["call_9"])
-        except TelegramServerError:
+        except Exception:
             raise AssistantErr(_["call_10"])
         await add_active_chat(chat_id)
         await music_on(chat_id)

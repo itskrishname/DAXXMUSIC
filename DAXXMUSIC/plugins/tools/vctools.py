@@ -16,7 +16,7 @@ from DAXXMUSIC.core.call import DAXX
 from pyrogram.types import VideoChatEnded, Message
 from pytgcalls import PyTgCalls
 from pytgcalls.types import AudioPiped, AudioVideoPiped
-from pytgcalls.exceptions import (NoActiveGroupCall, TelegramServerError, AlreadyJoinedError)
+from pytgcalls.exceptions import NoActiveGroupCall
 
 @app.on_message(filters.command(["vcinfo"], ["/", "!"]))
 async def strcall(client, message):
@@ -41,23 +41,24 @@ async def strcall(client, message):
         await assistant.leave_group_call(message.chat.id)
     except NoActiveGroupCall:
         await message.reply(f"ᴛʜᴇ ᴄᴀʟʟ ɪꜱ ɴᴏᴛ ᴏᴘᴇɴ ᴀᴛ ᴀʟʟ")
-    except TelegramServerError:
-        await message.reply(f"ꜱᴇɴᴅ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅ ᴀɢᴀɪɴ, ᴛʜᴇʀᴇ ɪꜱ ᴀ ᴘʀᴏʙʟᴇᴍ ᴡɪᴛʜ ᴛʜᴇ ᴛᴇʟᴇɢʀᴀᴍ ꜱᴇʀᴠᴇʀ ❌")
-    except AlreadyJoinedError:
+    except Exception as e:
         text = "ʙᴇʟᴏᴠᴇᴅꜱ ɪɴ ᴛʜᴇ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ 🫶 :\n\n"
-        participants = await assistant.get_participants(message.chat.id)
-        k = 0
-        for participant in participants:
-            info = participant
-            if info.muted == False:
-                mut = "ꜱᴘᴇᴀᴋɪɴɢ 🗣"
-            else:
-                mut = "ᴍᴜᴛᴇᴅ 🔕 "
-            user = await client.get_users(participant.user_id)
-            k += 1
-            text += f"{k} ➤ {user.mention} ➤ {mut}\n"
-        text += f"\nɴᴜᴍʙᴇʀ ᴏꜰ ᴘᴀʀᴛɪᴄɪᴘᴀɴᴛꜱ : {len(participants)}"
-        await message.reply(f"{text}")
+        try:
+            participants = await assistant.get_participants(message.chat.id)
+            k = 0
+            for participant in participants:
+                info = participant
+                if info.muted == False:
+                    mut = "ꜱᴘᴇᴀᴋɪɴɢ 🗣"
+                else:
+                    mut = "ᴍᴜᴛᴇᴅ 🔕 "
+                user = await client.get_users(participant.user_id)
+                k += 1
+                text += f"{k} ➤ {user.mention} ➤ {mut}\n"
+            text += f"\nɴᴜᴍʙᴇʀ ᴏꜰ ᴘᴀʀᴛɪᴄɪᴘᴀɴᴛꜱ : {len(participants)}"
+            await message.reply(f"{text}")
+        except:
+            await message.reply(f"An error occurred: {e}")
 
 
 other_filters = filters.group  & ~filters.via_bot & ~filters.forwarded
