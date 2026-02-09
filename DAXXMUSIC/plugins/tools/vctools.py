@@ -22,7 +22,7 @@ from pytgcalls.exceptions import NoActiveGroupCall
 async def strcall(client, message):
     assistant = await group_assistant(DAXX, message.chat.id)
     try:
-        await assistant.join_group_call(message.chat.id, MediaStream("./DAXXMUSIC/assets/call.mp3", audio_parameters=AudioQuality.HIGH, video_flags=MediaStream.Flags.IGNORE))
+        await assistant.play(message.chat.id, MediaStream("./DAXXMUSIC/assets/call.mp3", audio_parameters=AudioQuality.HIGH, video_flags=MediaStream.Flags.IGNORE))
         text = "- Beloveds in the call 🫶 :\n\n"
         participants = await assistant.get_participants(message.chat.id)
         k = 0
@@ -38,7 +38,7 @@ async def strcall(client, message):
         text += f"\nɴᴜᴍʙᴇʀ ᴏꜰ ᴘᴀʀᴛɪᴄɪᴘᴀɴᴛꜱ : {len(participants)}"
         await message.reply(f"{text}")
         await asyncio.sleep(7)
-        await assistant.leave_group_call(message.chat.id)
+        await assistant.leave_call(message.chat.id)
     except NoActiveGroupCall:
         await message.reply(f"ᴛʜᴇ ᴄᴀʟʟ ɪꜱ ɴᴏᴛ ᴏᴘᴇɴ ᴀᴛ ᴀʟʟ")
     except Exception as e:
