@@ -14,15 +14,15 @@ from typing import List, Union
 from pyrogram import filters
 from DAXXMUSIC.core.call import DAXX
 from pyrogram.types import VideoChatEnded, Message
-from pytgcalls import PyTgCalls, StreamType
-from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
+from pytgcalls import PyTgCalls
+from pytgcalls.types import AudioPiped, AudioVideoPiped
 from pytgcalls.exceptions import (NoActiveGroupCall, TelegramServerError, AlreadyJoinedError)
 
 @app.on_message(filters.command(["vcinfo"], ["/", "!"]))
 async def strcall(client, message):
     assistant = await group_assistant(DAXX, message.chat.id)
     try:
-        await assistant.join_group_call(message.chat.id, AudioPiped("./DAXXMUSIC/assets/call.mp3"), stream_type=StreamType().pulse_stream)
+        await assistant.join_group_call(message.chat.id, AudioPiped("./DAXXMUSIC/assets/call.mp3"))
         text = "- Beloveds in the call 🫶 :\n\n"
         participants = await assistant.get_participants(message.chat.id)
         k = 0

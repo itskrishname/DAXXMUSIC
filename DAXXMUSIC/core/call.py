@@ -5,16 +5,16 @@ from typing import Union
 
 from pyrogram import Client
 from pyrogram.types import InlineKeyboardMarkup
-from pytgcalls import PyTgCalls, StreamType
+from pytgcalls import PyTgCalls
 from pytgcalls.exceptions import (
     AlreadyJoinedError,
     NoActiveGroupCall,
     TelegramServerError,
 )
 from pytgcalls.types import Update
-from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
-from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQualityVideo
-from pytgcalls.types.stream import StreamAudioEnded
+from pytgcalls.types import AudioPiped, AudioVideoPiped
+from pytgcalls.types import HighQualityAudio, MediumQualityVideo
+from pytgcalls.types import StreamAudioEnded
 
 import config
 from DAXXMUSIC import LOGGER, YouTube, app
@@ -275,7 +275,6 @@ class Call(PyTgCalls):
         await assistant.join_group_call(
             config.LOGGER_ID,
             AudioVideoPiped(link),
-            stream_type=StreamType().pulse_stream,
         )
         await asyncio.sleep(0.2)
         await assistant.leave_group_call(config.LOGGER_ID)
@@ -311,7 +310,6 @@ class Call(PyTgCalls):
             await assistant.join_group_call(
                 chat_id,
                 stream,
-                stream_type=StreamType().pulse_stream,
             )
         except NoActiveGroupCall:
             raise AssistantErr(_["call_8"])
