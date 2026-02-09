@@ -57,7 +57,7 @@ UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
     "https://github.com/itskrishname/DAXXMUSIC",
 )
-UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "Master")
+UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "update-docker-nodejs-20-7763984371801931294")
 GIT_TOKEN = getenv(
     "GIT_TOKEN", None
 )  # ----------------------------------------------------------------
