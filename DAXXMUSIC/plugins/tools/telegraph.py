@@ -19,31 +19,31 @@ def upload_file(path):
         return False
 
 @app.on_message(filters.command(["tgm" , "telegraph"]))
-def ul(_, message):
+async def ul(_, message):
     reply = message.reply_to_message
     if reply and reply.media:
-        i = message.reply("𝐌𝙰𝙺𝙴 𝐀 𝐋𝙸𝙽𝙺...")
-        path = reply.download()
+        i = await message.reply("𝐌𝙰𝙺𝙴 𝐀 𝐋𝙸𝙽𝙺...")
+        path = await reply.download()
         url = upload_file(path)
         if url:
-            i.edit(f'Yᴏᴜʀ ʟɪɴᴋ sᴜᴄᴄᴇssғᴜʟ Gᴇɴ {url}')
+            await i.edit(f'Yᴏᴜʀ ʟɪɴᴋ sᴜᴄᴄᴇssғᴜʟ Gᴇɴ {url}')
         else:
-            i.edit("Failed to upload file.")
+            await i.edit("Failed to upload file.")
     else:
-        message.reply("Please reply to a media file.")
+        await message.reply("Please reply to a media file.")
 
 ########____________________________________________________________######
 
 @app.on_message(filters.command(["graph" , "grf"]))
-def ul_graph(_, message):
+async def ul_graph(_, message):
     reply = message.reply_to_message
     if reply and reply.media:
-        i = message.reply("𝐌𝙰𝙺𝙴 𝐀 𝐋𝙸𝙽𝙺...")
-        path = reply.download()
+        i = await message.reply("𝐌𝙰𝙺𝙴 𝐀 𝐋𝙸𝙽𝙺...")
+        path = await reply.download()
         url = upload_file(path)
         if url:
-            i.edit(f'Yᴏᴜʀ ʟɪɴᴋ sᴜᴄᴄᴇssғᴜʟ Gᴇɴ {url}')
+            await i.edit(f'Yᴏᴜʀ ʟɪɴᴋ sᴜᴄᴄᴇssғᴜʟ Gᴇɴ {url}')
         else:
-            i.edit("Failed to upload file.")
+            await i.edit("Failed to upload file.")
     else:
-        message.reply("Please reply to a media file.")
+        await message.reply("Please reply to a media file.")
