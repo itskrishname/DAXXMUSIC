@@ -152,12 +152,12 @@ PLAYLIST_IMG_URL = "https://files.catbox.moe/fwdofa.jpg"
 STATS_IMG_URL = "https://files.catbox.moe/q6bw27.jpg"
 TELEGRAM_AUDIO_URL = "https://files.catbox.moe/upm1g2.jpg"
 TELEGRAM_VIDEO_URL = "https://files.catbox.moe/a2x1r1.jpg"
-STREAM_IMG_URL = "https://telegra.ph/file/03efec694e41e891b29dc.jpg"
-SOUNCLOUD_IMG_URL = "https://telegra.ph/file/d723f4c80da157fca1678.jpg"
-YOUTUBE_IMG_URL = "https://telegra.ph/file/4dc854f961cd3ce46899b.jpg"
-SPOTIFY_ARTIST_IMG_URL = "https://telegra.ph/file/d723f4c80da157fca1678.jpg"
-SPOTIFY_ALBUM_IMG_URL = "https://telegra.ph/file/6c741a6bc1e1663ac96fc.jpg"
-SPOTIFY_PLAYLIST_IMG_URL = "https://telegra.ph/file/6c741a6bc1e1663ac96fc.jpg"
+STREAM_IMG_URL = "https://files.catbox.moe/yaimr5.jpg"
+SOUNCLOUD_IMG_URL = "https://files.catbox.moe/3pbj0b.jpg"
+YOUTUBE_IMG_URL = "https://files.catbox.moe/5ufpyh.jpg"
+SPOTIFY_ARTIST_IMG_URL = "https://files.catbox.moe/t6tg13.jpg"
+SPOTIFY_ALBUM_IMG_URL = "https://files.catbox.moe/5ni8o3.jpg"
+SPOTIFY_PLAYLIST_IMG_URL = "https://files.catbox.moe/wqqs1b.jpg"
 
 # ------------------------------------------------------------------------
 # ------------------------------------------------------------------------
