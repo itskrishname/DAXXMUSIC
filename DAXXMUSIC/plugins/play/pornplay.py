@@ -5,7 +5,7 @@ from DAXXMUSIC import app
 import pytgcalls
 import os, yt_dlp 
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, Message
-from pytgcalls.types import AudioVideoPiped
+from pytgcalls.types import MediaStream, AudioQuality, VideoQuality
 from DAXXMUSIC.plugins.play import play
 from DAXXMUSIC.plugins.play.pornplay import play
 
