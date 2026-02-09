@@ -1,5 +1,7 @@
 import asyncio
 import importlib
+import os
+import httpx
 
 from pyrogram import idle
 from pytgcalls.exceptions import NoActiveGroupCall
@@ -11,6 +13,24 @@ from DAXXMUSIC.misc import sudo
 from DAXXMUSIC.plugins import ALL_MODULES
 from DAXXMUSIC.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
+
+
+async def save_cookies():
+    if config.COOKIES_URL:
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.get(config.COOKIES_URL)
+                response.raise_for_status()
+
+                cookies_dir = "cookies"
+                if not os.path.exists(cookies_dir):
+                    os.makedirs(cookies_dir)
+
+                with open(os.path.join(cookies_dir, "cookies.txt"), "w") as f:
+                    f.write(response.text)
+                LOGGER(__name__).info(f"Cookies fetched successfully from {config.COOKIES_URL}")
+        except Exception as e:
+            LOGGER(__name__).error(f"Failed to fetch cookies: {e}")
 
 
 async def init():
@@ -33,6 +53,9 @@ async def init():
             BANNED_USERS.add(user_id)
     except:
         pass
+
+    await save_cookies()
+
     await app.start()
     for all_module in ALL_MODULES:
         importlib.import_module("DAXXMUSIC.plugins" + all_module)
