@@ -469,7 +469,6 @@ class Call(PyTgCalls):
                     )
                 try:
                     await client.play(chat_id, stream)
-                    await client.play(chat_id, stream)
                 except:
                     return await app.send_message(
                         original_chat_id,
@@ -498,7 +497,7 @@ class Call(PyTgCalls):
                         video_flags=MediaStream.Flags.IGNORE,
                     )
                 try:
-                    await client.change_stream(chat_id, stream)
+                    await client.play(chat_id, stream)
                 except:
                     return await app.send_message(
                         original_chat_id,
