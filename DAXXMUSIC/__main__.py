@@ -18,8 +18,15 @@ from config import BANNED_USERS
 async def save_cookies():
     if config.COOKIES_URL:
         try:
+            url = config.COOKIES_URL
+            # Automatically convert batbin/pastebin links to raw if needed
+            if "batbin.me" in url and "raw" not in url:
+                url = url.replace("batbin.me/", "batbin.me/raw/")
+            elif "pastebin.com" in url and "raw" not in url:
+                url = url.replace("pastebin.com/", "pastebin.com/raw/")
+
             async with httpx.AsyncClient() as client:
-                response = await client.get(config.COOKIES_URL)
+                response = await client.get(url)
                 response.raise_for_status()
 
                 cookies_dir = "cookies"
@@ -33,7 +40,7 @@ async def save_cookies():
 
                 with open(os.path.join(cookies_dir, "cookies.txt"), "w") as f:
                     f.write(response.text)
-                LOGGER(__name__).info(f"Cookies fetched successfully from {config.COOKIES_URL}")
+                LOGGER(__name__).info(f"Cookies fetched successfully from {url}")
         except Exception as e:
             LOGGER(__name__).error(f"Failed to fetch cookies: {e}")
 
