@@ -25,6 +25,11 @@ async def save_cookies():
                 cookies_dir = "cookies"
                 if not os.path.exists(cookies_dir):
                     os.makedirs(cookies_dir)
+                else:
+                    # Clean up existing cookies to avoid using stale ones
+                    for filename in os.listdir(cookies_dir):
+                        if filename.endswith(".txt"):
+                            os.remove(os.path.join(cookies_dir, filename))
 
                 with open(os.path.join(cookies_dir, "cookies.txt"), "w") as f:
                     f.write(response.text)
