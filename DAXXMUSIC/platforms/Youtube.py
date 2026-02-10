@@ -168,7 +168,7 @@ class YouTubeAPI:
             cookies(),
             "-g",
             "-f",
-            "bestvideo[height<=?720][width<=?1280]+bestaudio/best[height<=?720][width<=?1280]",
+            "best",
             f"{link}",
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
