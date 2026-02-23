@@ -1,9 +1,13 @@
 FROM nikolaik/python-nodejs:python3.10-nodejs19
 
-RUN apt-get update \
+# Fix Buster EOL repositories and disable broken 3rd party repos
+RUN echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian buster-updates main" >> /etc/apt/sources.list \
+    && rm -f /etc/apt/sources.list.d/*.list \
+    && apt-get -o Acquire::Check-Valid-Until=false update \
     && apt-get install -y --no-install-recommends ffmpeg \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean
 
 COPY . /app/
 WORKDIR /app/

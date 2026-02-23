@@ -1,5 +1,7 @@
 import asyncio
 import importlib
+import os
+import httpx
 
 from pyrogram import idle
 from pytgcalls.exceptions import NoActiveGroupCall
@@ -11,6 +13,36 @@ from DAXXMUSIC.misc import sudo
 from DAXXMUSIC.plugins import ALL_MODULES
 from DAXXMUSIC.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
+
+
+async def save_cookies():
+    if config.COOKIES_URL:
+        try:
+            url = config.COOKIES_URL
+            # Automatically convert batbin/pastebin links to raw if needed
+            if "batbin.me" in url and "raw" not in url:
+                url = url.replace("batbin.me/", "batbin.me/raw/")
+            elif "pastebin.com" in url and "raw" not in url:
+                url = url.replace("pastebin.com/", "pastebin.com/raw/")
+
+            async with httpx.AsyncClient() as client:
+                response = await client.get(url)
+                response.raise_for_status()
+
+                cookies_dir = "cookies"
+                if not os.path.exists(cookies_dir):
+                    os.makedirs(cookies_dir)
+                else:
+                    # Clean up existing cookies to avoid using stale ones
+                    for filename in os.listdir(cookies_dir):
+                        if filename.endswith(".txt"):
+                            os.remove(os.path.join(cookies_dir, filename))
+
+                with open(os.path.join(cookies_dir, "cookies.txt"), "w") as f:
+                    f.write(response.text)
+                LOGGER(__name__).info(f"Cookies fetched successfully from {url}")
+        except Exception as e:
+            LOGGER(__name__).error(f"Failed to fetch cookies: {e}")
 
 
 async def init():
@@ -33,6 +65,9 @@ async def init():
             BANNED_USERS.add(user_id)
     except:
         pass
+
+    await save_cookies()
+
     await app.start()
     for all_module in ALL_MODULES:
         importlib.import_module("DAXXMUSIC.plugins" + all_module)

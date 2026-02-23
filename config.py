@@ -57,7 +57,7 @@ UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
     "https://github.com/itskrishname/DAXXMUSIC",
 )
-UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "Master")
+UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "update-docker-nodejs-20-7763984371801931294")
 GIT_TOKEN = getenv(
     "GIT_TOKEN", None
 )  # ----------------------------------------------------------------
@@ -97,7 +97,7 @@ SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", "1c21247d714244ddbb09925dac565ae
 SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", "709e1a2969664491b58200860623ef19")
 # ----------------------------------------------------------------------------------
 
-
+COOKIES_URL = getenv("COOKIES_URL", "https://batbin.me/interknotted")
 
 
 # -----------------------------------------------------------------------------------
